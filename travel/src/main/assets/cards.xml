@@ -9,7 +9,7 @@
     <boardingcards>
         <boardingcard type="flight" id="SK455" start="0" end="3" gate="45B" seat="3A" baggage="344" />
         <boardingcard type="bus" id="airport" start="1" end="0" />
-        <boardingcard type="train" id="78A" start="2" end="1" />
+        <boardingcard type="train" id="78A" start="2" end="1" seat="45B" />
         <boardingcard type="flight" id="SK22" start="3" end="4" gate="22" seat="7B" />
     </boardingcards>
 </travel>

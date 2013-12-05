@@ -1,17 +1,17 @@
 package com.example.travel;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.ListFragment;
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ListView;
+import android.widget.TextView;
 
 import org.xml.sax.SAXException;
 
@@ -56,6 +56,7 @@ public class TravelActivity extends Activity {
     public static class TravelFragment extends ListFragment {
 
         private Travel mTravel;
+        private ProgressDialog mProgressDialog;
 
         public TravelFragment() {
         }
@@ -71,16 +72,55 @@ public class TravelActivity extends Activity {
                 e.printStackTrace();
             }
 
-            View rootView = inflater.inflate(R.layout.fragment_travel, container, false);
+            final View rootView = inflater.inflate(R.layout.fragment_travel, container, false);
             BoardingCardListAdapter adapter = new BoardingCardListAdapter(getActivity(), mTravel.boardingCards);
             setListAdapter(adapter);
 
             Button sortButton = (Button) rootView.findViewById(R.id.sort_button);
             sortButton.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
-                    Collections.sort(mTravel.boardingCards);
-                    ((BoardingCardListAdapter) getListAdapter()).notifyDataSetChanged();
+                public void onClick(final View v) {
+                    // Use an AsyncTask to display a progress dialog to the user and add in a
+                    // sleep so that we can see it
+                    AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+
+                        @Override
+                        protected void onPreExecute() {
+                            mProgressDialog = new ProgressDialog(getActivity());
+                            mProgressDialog.setTitle("Sorting...");
+                            mProgressDialog.setMessage("Please wait.");
+                            mProgressDialog.setCancelable(false);
+                            mProgressDialog.setIndeterminate(true);
+                            mProgressDialog.show();
+                        }
+
+                        @Override
+                        protected Void doInBackground(Void... arg0) {
+                            try {
+                                Collections.sort(mTravel.boardingCards);
+                                // It doesn't really take very long, so adding in a sleep to
+                                // show the progress dialog
+                                Thread.sleep(2000);
+                            } catch (InterruptedException e) {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                            }
+                            return null;
+                        }
+
+                        @Override
+                        protected void onPostExecute(Void result) {
+                            if (mProgressDialog != null) {
+                                // Update the views on the UI thread to reflect the new order
+                                rootView.findViewById(R.id.sort_button).setVisibility(View.GONE);
+                                ((TextView) rootView.findViewById(R.id.title)).setText(R.string.sorted_trip);
+                                ((BoardingCardListAdapter) getListAdapter()).notifyDataSetChanged();
+                                mProgressDialog.dismiss();
+                            }
+                        }
+
+                    };
+                    task.execute((Void[])null);
                 }
             });
             return rootView;

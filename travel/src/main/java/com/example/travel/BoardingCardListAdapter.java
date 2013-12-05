@@ -37,13 +37,27 @@ public class BoardingCardListAdapter extends ArrayAdapter<BoardingCard> {
         }
 
         BoardingCard boardingCard = getItem(position);
-        viewHolder.type.setText(boardingCard.type);
-        viewHolder.start.setText(boardingCard.start.name);
+        viewHolder.type.setText(boardingCard.type  + " (" + boardingCard.id + ")");
+        viewHolder.start.setText(boardingCard.start.name + " ->");
         viewHolder.end.setText(boardingCard.end.name);
-        viewHolder.seat.setText(boardingCard.seat);
+        if (boardingCard.seat != null) {
+            viewHolder.seat.setVisibility(View.VISIBLE);
+            viewHolder.seat.setText("Seat: " + boardingCard.seat);
+        } else {
+            viewHolder.seat.setVisibility(View.GONE);
+        }
         if (boardingCard instanceof BoardingCardFlight) {
-            viewHolder.gate.setText(((BoardingCardFlight) boardingCard).gate);
-            viewHolder.baggage.setText(((BoardingCardFlight) boardingCard).baggage);
+            viewHolder.gate.setVisibility(View.VISIBLE);
+            viewHolder.gate.setText("Gate: " + ((BoardingCardFlight) boardingCard).gate);
+            if (((BoardingCardFlight) boardingCard).baggage != null) {
+                viewHolder.baggage.setVisibility(View.VISIBLE);
+                viewHolder.baggage.setText("Baggage drop: " + ((BoardingCardFlight) boardingCard).baggage);
+            } else {
+                viewHolder.baggage.setVisibility(View.GONE);
+            }
+        } else {
+            viewHolder.gate.setVisibility(View.GONE);
+            viewHolder.baggage.setVisibility(View.GONE);
         }
 
         return convertView;

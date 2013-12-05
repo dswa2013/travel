@@ -4,6 +4,8 @@
     <string name="app_name">Travel</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="sort">Sort</string>
+    <string name="sort">Sort Trip</string>
+    <string name="unsorted_boarding_cards">Unsorted Boarding Cards:</string>
+    <string name="sorted_trip">Sorted trip:</string>
 
 </resources>
