@@ -1,0 +1,15 @@
+<travel>
+    <destinations>
+        <destination id="0" name="Gerona Airport" />
+        <destination id="1" name="Barcelona" />
+        <destination id="2" name="Madrid" />
+        <destination id="3" name="London" />
+        <destination id="4" name="New York JFK" />
+    </destinations>
+    <boardingcards>
+        <boardingcard type="flight" id="SK455" start="0" end="3" gate="45B" seat="3A" baggage="344" />
+        <boardingcard type="bus" id="airport" start="1" end="0" />
+        <boardingcard type="train" id="78A" start="2" end="1" />
+        <boardingcard type="flight" id="SK22" start="3" end="4" gate="22" seat="7B" />
+    </boardingcards>
+</travel>
