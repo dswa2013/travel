@@ -5,3 +5,71 @@ Sorts a series of boarding cards in travel/src/main/assets/cards.xml .
 
 The following git commands were performed:
 
+
+C:\projects\travel>cd ..
+
+C:\projects>cd travel
+
+C:\projects\travel>git init
+Initialized empty Git repository in C:/projects/travel/.git/
+
+C:\projects\travel>git add README
+
+C:\projects\travel>git commit -am"new travel project"
+[master (root-commit) 519da83] new travel project
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 README
+
+C:\projects\travel>git branch
+* master
+
+C:\projects\travel>git checkout -b develop
+Switched to a new branch 'develop'
+
+C:\projects\travel>git add .gitignore .idea build.gradle gradle.properties gradle gradlew gradlew.bat settings.gradle travel.iml travel
+
+C:\projects\travel>git branch
+* develop
+  master
+
+C:\projects\travel>git commit -am"basic sorting"
+[develop 822beb2] basic sorting
+ 43 files changed, 967 insertions(+)
+
+C:\projects\travel>git merge develop
+Updating 519da83..822beb2
+Fast-forward
+
+C:\projects\travel>git checkout -b ui_branch
+Switched to a new branch 'ui_branch'
+
+C:\projects\travel>git branch
+  develop
+  master
+* ui_branch
+
+C:\projects\travel>git commit -am"ui improvements"
+[ui_branch e814b83] ui improvements
+ 7 files changed, 94 insertions(+), 19 deletions(-)
+
+C:\projects\travel>git checkout master
+Switched to branch 'master'
+
+C:\projects\travel>git merge ui_branch
+Updating 822beb2..e814b83
+Fast-forward
+
+C:\projects\travel>git remote add origin https://github.com/dswa2013/travel.git
+
+C:\projects\travel>git push --all
+Username for 'https://github.com': dswa2013
+Password for 'https://dswa2013@github.com':
+Counting objects: 97, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (73/73), done.
+Writing objects: 100% (97/97), 150.93 KiB, done.
+Total 97 (delta 17), reused 0 (delta 0)
+To https://github.com/dswa2013/travel.git
+ * [new branch]      develop -> develop
+ * [new branch]      master -> master
+ * [new branch]      ui_branch -> ui_branch
