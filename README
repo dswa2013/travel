@@ -3,6 +3,11 @@ Travel app
 
 Sorts a series of boarding cards in travel/src/main/assets/cards.xml .
 
+To open in Android Studio:
+1. Clone this repo
+2. File -> Import Project -> Select build.gradle -> Use default gradle wrapper
+3. Run -> Run 'travel-travel'
+
 The compiled app is travel.apk.
 
 
